@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
+from django.http import HttpResponse
+
+def home_view(request):
+    return HttpResponse('<h1>Task Management API</h1><p>The API is running! Access the tasks at <a href="/api/tasks/">/api/tasks/</a></p>')
 
 urlpatterns = [
+    path('', home_view),
     path('admin/', admin.site.urls),
     path('api/', include('management.urls')),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
